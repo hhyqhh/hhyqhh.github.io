@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="树莓派,Airplay," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="手里有一个第一代的树莓派开发板，很长时间都没有使用过。今天尝试着搭建一个支持AirPlay的服务。顺便回顾一下树莓派的烧录、配置、远程登录等操作。">
+<meta name="keywords" content="树莓派,Airplay">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于树莓派的AirPlay功能实现">
+<meta property="og:url" content="http://www.hhyqhh.top/2017/08/04/基于树莓派的AirPlay功能实现/index.html">
+<meta property="og:site_name" content="HHYQHH (￣▽￣)／">
+<meta property="og:description" content="手里有一个第一代的树莓派开发板，很长时间都没有使用过。今天尝试着搭建一个支持AirPlay的服务。顺便回顾一下树莓派的烧录、配置、远程登录等操作。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/64383213.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/90601986.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/55951390.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/39200239.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/71078029.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/88095864.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/16675735.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/9901384.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/43200272.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/66420451.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/39564735.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/599204.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/99779265.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/41299038.jpg">
+<meta property="og:updated_time" content="2017-08-04T11:39:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于树莓派的AirPlay功能实现">
+<meta name="twitter:description" content="手里有一个第一代的树莓派开发板，很长时间都没有使用过。今天尝试着搭建一个支持AirPlay的服务。顺便回顾一下树莓派的烧录、配置、远程登录等操作。">
+<meta name="twitter:image" content="http://ots0oqrma.bkt.clouddn.com/17-8-4/64383213.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.hhyqhh.top/2017/08/04/基于树莓派的AirPlay功能实现/"/>
+
+
+
+
+
+  <title>基于树莓派的AirPlay功能实现 | HHYQHH (￣▽￣)／</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HHYQHH (￣▽￣)／</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.hhyqhh.top/2017/08/04/基于树莓派的AirPlay功能实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="haohao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ots0oqrma.bkt.clouddn.com/17-7-28/33649087.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HHYQHH (￣▽￣)／">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于树莓派的AirPlay功能实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-04T12:04:01+08:00">
+                2017-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技巧/" itemprop="url" rel="index">
+                    <span itemprop="name">技巧</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://ots0oqrma.bkt.clouddn.com/17-8-4/64383213.jpg" alt=""><br>手里有一个第一代的树莓派开发板，很长时间都没有使用过。今天尝试着搭建一个支持AirPlay的服务。顺便回顾一下树莓派的烧录、配置、远程登录等操作。<br><a id="more"></a></p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><blockquote>
+<p>AirPlay是苹果公司的在iOS4.2及OS X Mountain Lion中加入的一种播放技术，可以将iPhone、iPod touch、iPad及Mac（需要OS X Mountain Lion或更新版）上的视频镜像传送到支持Airplay的设备</p>
+</blockquote>
+<p>前一段时间购买了“Beats X”这个耳机，被苹果设备间切换的流畅与无缝所吸引。想着时候可以让其他的音频设备也实现这样的无缝切换。查资料发现苹果自家的AirPlay技术可以实现这样的流畅体验(AirPlay与Beats X耳机的实现原理不同。前者是基于无线局域网,后者是蓝牙和icloud的协同配合。但是用户体方面很像，可以在苹果设备的控制中心控制)。基于网上的相关教程，通过树莓派运行一个Airplay服务，配合小音响实现相应的功能。</p>
+<h1 id="烧录系统"><a href="#烧录系统" class="headerlink" title="烧录系统"></a>烧录系统</h1><p>树莓派支持很多系统，这里选用的官方的<a href="https://www.raspberrypi.org/downloads/raspbian/" target="_blank" rel="external">raspbian</a>系统。</p>
+<p><img src="http://ots0oqrma.bkt.clouddn.com/17-8-4/90601986.jpg" alt=""></p>
+<p>下载后得到<code>raspbian-jessie.zip</code> 的压缩包，解压得到系统镜像<code>raspbian-jessie.img</code> 。通过 <code>Win32DiskImager</code> 软件烧录镜像到一张空白SD卡上。</p>
+<p><img src="http://ots0oqrma.bkt.clouddn.com/17-8-4/55951390.jpg" alt=""></p>
+<p>待烧录完毕，插入树莓派，上电即可开机。</p>
+<hr>
+<h1 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h1><p>一般来说，登陆到树莓派的系统有三种方式：</p>
+<ol>
+<li>开发板外接显示器和键盘鼠标。</li>
+<li>通过VNC远程桌面登陆</li>
+<li>通过SSH登陆</li>
+</ol>
+<p>这次用树莓派，只是需要搭建AirPlay服务，所以SSH远程登陆时最省时省力的方式。</p>
+<h2 id="SSH登陆"><a href="#SSH登陆" class="headerlink" title="SSH登陆"></a>SSH登陆</h2><p>目前的树莓派系统默认是关闭SSH服务的，所以无法在第一次直接使用SSH登陆，首先在刚才烧录好SD卡的根目录下建立一个名为<code>SSH</code>文件(大写，且没有后缀名)。之后再插卡上电就可以使用了。</p>
+<p>通过网线将树莓派和路由器相连，登陆路由器后台可以查询树莓派获得的IP地址。</p>
+<p><img src="http://ots0oqrma.bkt.clouddn.com/17-8-4/39200239.jpg" alt=""></p>
+<p>知道树莓派的IP后可以通过软件<code>PuTTY</code>进行登陆。</p>
+<p><img src="http://ots0oqrma.bkt.clouddn.com/17-8-4/71078029.jpg" alt=""></p>
+<p>Host Name(or IP address)这里填写刚才查到的IP地址，Connection type选择SSH。其他选项默认，点击Open。依次输入树莓派的账户和密码：</p>
+<p><img src="http://ots0oqrma.bkt.clouddn.com/17-8-4/88095864.jpg" alt=""></p>
+<h2 id="VNC登陆"><a href="#VNC登陆" class="headerlink" title="VNC登陆"></a>VNC登陆</h2><p>在SSH登陆的基础上，可以配置实现远程桌面登陆（图形化界面）。<br>由于系统中默认没有安装相关服务，所以首先需要安装。<br>执行如下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install tightvncserver</div></pre></td></tr></table></figure></p>
+<p>安装完毕后设置密码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vncpasswd</div></pre></td></tr></table></figure></p>
+<p>启动服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tightvncserver -geometry 800x600 :1</div></pre></td></tr></table></figure></p>
+<p>通过软件<code>RealVNC Viewer</code> 远程登陆图形化界面</p>
+<p><img src="http://ots0oqrma.bkt.clouddn.com/17-8-4/16675735.jpg" alt=""></p>
+<p>VNC Server 这里填写IP地址:控制台号码。刚才命令<code>tightvncserver -geometry 800x600 :1</code> 表示以800x600的分辨率开启1号控制台。所以这里输入<code>192.168.123.5:1</code>。之后点击登陆，输入密码就可以看到以图形化界面访问到树莓派。</p>
+<p><img src="http://ots0oqrma.bkt.clouddn.com/17-8-4/9901384.jpg" alt=""></p>
+<p>如果希望每次都使用VNC登陆树莓派，可以配置其开机启动。具体方法可以参考文章<a href="http://shumeipai.nxez.com/2013/09/04/login-rpi-with-vnc.html?variant=zh-cn" target="_blank" rel="external">《VNC远程登录树莓派的图形界面》</a>。其中有详细的配置方法。</p>
+<h2 id="无线链接"><a href="#无线链接" class="headerlink" title="无线链接"></a>无线链接</h2><p>刚才的是通过网线使树莓派和电脑在同一个局域网下的。第一代的树莓派默认硬件是不支持无线网络的（貌似新的树莓派支持无线）。我采用了树莓派默认免驱的无线网卡<code>RTL8188CUS</code>。通过USB接口和树莓派相连。在SSH登陆的情况下（SSH登陆对网络质量要求低）。通过命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lsusb</div></pre></td></tr></table></figure></p>
+<p>可以显示是否识别到了无线网卡</p>
+<p><img src="http://ots0oqrma.bkt.clouddn.com/17-8-4/43200272.jpg" alt=""></p>
+<p>同时执行命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ifconfig</div></pre></td></tr></table></figure></p>
+<p>也可以查询无线网卡的信息（Wlan0）</p>
+<p><img src="http://ots0oqrma.bkt.clouddn.com/17-8-4/66420451.jpg" alt=""></p>
+<p>通过一下命令, 搜素当前环境的无线网络。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo iwlist wlan0 scan | grep ESSID</div></pre></td></tr></table></figure></p>
+<p><img src="http://ots0oqrma.bkt.clouddn.com/17-8-4/39564735.jpg" alt=""></p>
+<p>通过如下命令备份原始文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo cp /etc/wpa_supplicant/wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf.bak</div></pre></td></tr></table></figure>
+<p>通过命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo nano /etc/wpa_supplicant/wpa_supplicant.conf</div></pre></td></tr></table></figure></p>
+<p>修改其中的内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</div><div class="line">update_config=1</div><div class="line">country=GB</div><div class="line"></div><div class="line">network=&#123;</div><div class="line">        ssid=&quot;your_wfi_Name&quot;</div><div class="line">        psk=&quot;your_wifi_PassWord&quot;</div><div class="line">        key_mgmt=WPA-PSK</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里<code>ssid</code> <code>psk</code> <code>key_mgmt</code> 分别指无线网的名称、密码、加密方式。更改完后,<code>CTRL+O</code> 保存更改， <code>CTRL+X</code>退出编辑器。</p>
+<p>如果你用VNC的形式登录树莓派，则配置Wifi只要点击远程桌面右上角的Wifi图表进行连接即可。</p>
+<hr>
+<h1 id="更新软件"><a href="#更新软件" class="headerlink" title="更新软件"></a>更新软件</h1><h2 id="更改软件源"><a href="#更改软件源" class="headerlink" title="更改软件源"></a>更改软件源</h2><p>树莓派默认的软件源地址比较慢（亲测只有20~30 kb/s）。所以普遍会更关国内的镜像源<br>SSH方式登录树莓派</p>
+<p>输入以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nano /etc/apt/sources.list</div></pre></td></tr></table></figure></p>
+<p>复制一下内容在其中，并且通过<code>#</code>号注销原来的地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">deb http://mirrors.aliyun.com/raspbian/raspbian/ jessie main non-free contrib</div><div class="line">deb-src http://mirrors.aliyun.com/raspbian/raspbian/ jessie main non-free contrib</div></pre></td></tr></table></figure></p>
+<p>效果如下<br><img src="http://ots0oqrma.bkt.clouddn.com/17-8-4/599204.jpg" alt=""></p>
+<p>之后通过<code>CTRL+O</code> 保存更改， <code>CTRL+X</code>退出编辑器。</p>
+<h2 id="执行更新"><a href="#执行更新" class="headerlink" title="执行更新"></a>执行更新</h2><p>执行如下命令,进行更新系统软件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update &amp;&amp; apt-get upgrade -y</div></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="安装Airplay服务"><a href="#安装Airplay服务" class="headerlink" title="安装Airplay服务"></a>安装Airplay服务</h1><p>以下的整个安装都是基于一个开源项目进行的，这是项目主页<a href="https://github.com/juhovh/shairplay" target="_blank" rel="external">(https://github.com/juhovh/shairplay)</a>。</p>
+<p><img src="http://ots0oqrma.bkt.clouddn.com/17-8-4/99779265.jpg" alt=""></p>
+<p>其中给出了详细的安装方法。</p>
+<h2 id="安装依赖环境"><a href="#安装依赖环境" class="headerlink" title="安装依赖环境"></a>安装依赖环境</h2><p>通过SSH登录树莓派,分别执行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install autoconf automake libtool</div><div class="line">sudo apt-get install libltdl-dev libao-dev libavahi-compat-libdnssd-dev</div><div class="line">sudo apt-get install avahi-daemon</div></pre></td></tr></table></figure></p>
+<h2 id="从GitHub上获取源码"><a href="#从GitHub上获取源码" class="headerlink" title="从GitHub上获取源码"></a>从GitHub上获取源码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/juhovh/shairplay.git</div></pre></td></tr></table></figure>
+<h2 id="编译和安装"><a href="#编译和安装" class="headerlink" title="编译和安装"></a>编译和安装</h2><p>进入对应的目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd shairplay</div></pre></td></tr></table></figure></p>
+<p>依次执行如下四条指令，进行代码的编译和安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">./autogen.sh</div><div class="line">./configure</div><div class="line">make</div><div class="line">sudo make install</div></pre></td></tr></table></figure></p>
+<hr>
+<h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><p>进入软件的当前目录 <code>/home/pi/shairplay</code> 。执行如下命令即可开启服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">shairplay -a your_AirPlay_Name</div></pre></td></tr></table></figure>
+<p>此时ios设备或者Mac设备连接在同一个Wifi下，便可看到支持AirPlay的设备，名称就是<code>your_AirPlay_Name</code>。点击连接后，苹果设备的音频信号就通过Wifi传输到树莓派的3.5mm音频口。这里可以接入音响的信号输入口。</p>
+<p><img src="http://ots0oqrma.bkt.clouddn.com/17-8-4/41299038.jpg" alt=""></p>
+<hr>
+<h1 id="完善"><a href="#完善" class="headerlink" title="完善"></a>完善</h1><p>为了使树莓派每次上电后可以自动开启AirPlay服务。需要配置自启动，另外消除噪声。</p>
+<h2 id="自启动"><a href="#自启动" class="headerlink" title="自启动"></a>自启动</h2><h3 id="创建启动脚本文件"><a href="#创建启动脚本文件" class="headerlink" title="创建启动脚本文件"></a>创建启动脚本文件</h3><p>依次执行如下命令，建立一个启动脚本文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd /etc/init.d/</div><div class="line">touch shairplay</div><div class="line">nano shairplay</div></pre></td></tr></table></figure></p>
+<p>在其中复制一下内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">#</div><div class="line"># This starts and stops shairplay</div><div class="line">#</div><div class="line">### BEGIN INIT INFO</div><div class="line"># Provides: shairplay</div><div class="line"># Required-Start: $network</div><div class="line"># Required-Stop:</div><div class="line"># Short-Description: Free portable AirPlay server implementation similar to ShairPort.</div><div class="line"># Description: Free portable AirPlay server implementation similar to ShairPort.</div><div class="line"># Default-Start: 2 3 4 5</div><div class="line"># Default-Stop: 0 1 6</div><div class="line">### END INIT INFO</div><div class="line"></div><div class="line"></div><div class="line"># Source function library.</div><div class="line">. /lib/lsb/init-functions</div><div class="line"></div><div class="line">DAEMON=&quot;/usr/local/bin/shairplay&quot;</div><div class="line">DAEMON_ARGS=&quot;-a your_AirPlay_Name&quot;</div><div class="line">AIRPORT_KEY_DIR=&quot;/usr/local/share/shairplay&quot;</div><div class="line"></div><div class="line">[ -x $binary ] || exit 0</div><div class="line"></div><div class="line">RETVAL=0</div><div class="line"></div><div class="line">start() &#123;</div><div class="line"> echo -n &quot;Starting shairplay: &quot;</div><div class="line"> start-stop-daemon --start --quiet --chdir $AIRPORT_KEY_DIR \</div><div class="line"> --exec &quot;$DAEMON&quot; -b --oknodo -- $DAEMON_ARGS</div><div class="line"> log_end_msg $?</div><div class="line">&#125;</div><div class="line"></div><div class="line">stop() &#123;</div><div class="line"> echo -n &quot;Shutting down shairplay: &quot;</div><div class="line"> start-stop-daemon --stop --quiet --exec &quot;$DAEMON&quot; \</div><div class="line"> --retry 1 --oknodo</div><div class="line"> log_end_msg $?</div><div class="line">&#125;</div><div class="line"></div><div class="line">restart() &#123;</div><div class="line"> stop</div><div class="line"> sleep 1</div><div class="line"> start</div><div class="line">&#125;</div><div class="line"></div><div class="line">case &quot;$1&quot; in</div><div class="line"> start)</div><div class="line"> start</div><div class="line"> ;;</div><div class="line"> stop)</div><div class="line"> stop</div><div class="line"> ;;</div><div class="line"> status)</div><div class="line"> status shairplay</div><div class="line"> ;;</div><div class="line"> restart)</div><div class="line"> restart</div><div class="line"> ;;</div><div class="line"> *)</div><div class="line"> echo &quot;Usage: $0 &#123;start|stop|status|restart&#125;&quot;</div><div class="line"> ;;</div><div class="line">esac</div><div class="line">exit 0</div></pre></td></tr></table></figure></p>
+<p>其中刚才的脚本文件中的<code>DAEMON_ARGS=&quot;-a your_AirPlay_Name&quot;</code>可以设置自己的名字。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">DAEMON=&quot;/usr/local/bin/shairplay&quot;</div><div class="line">DAEMON_ARGS=&quot;-a your_AirPlay_Name&quot;</div><div class="line">AIRPORT_KEY_DIR=&quot;/usr/local/share/shairplay&quot;</div></pre></td></tr></table></figure></p>
+<p>之后通过<code>CTRL+O</code> 保存更改， <code>CTRL+X</code>退出编辑器。</p>
+<h3 id="加入执行权限"><a href="#加入执行权限" class="headerlink" title="加入执行权限"></a>加入执行权限</h3><p>依次执行如下命令。赋予脚本执行权限，并且更新配置信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chmod +x /etc/init.d/shairplay</div><div class="line">update-rc.d shairplay defaults</div></pre></td></tr></table></figure></p>
+<p>执行如下命令，切换到用户目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd ~</div></pre></td></tr></table></figure></p>
+<p>依次执行如下命令,拷贝<code>airport.key</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir /usr/local/share/shairplay</div><div class="line">cp shairplay/airport.key /usr/local/share/shairplay</div></pre></td></tr></table></figure></p>
+<p>输入一下命令，在<code>etc/rc.local</code>中添加内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nano /etc/rc.local</div></pre></td></tr></table></figure></p>
+<p>添加的内容如下(在exit 0之前)。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># Don&apos;t run multiple instances - start just one screen, named &quot;shairplay&quot;:</div><div class="line">[[ $(screen -list | grep shairplay) == &apos;&apos; ]] &amp;&amp;</div><div class="line"> screen -dmS shairplay sh</div><div class="line"># Keep shairplay perpetually running. When it crashes, we can just SIGKILL it, and it comes back:</div><div class="line">[[ $(ps aux | grep -v grep | grep pts | grep &apos;/usr/bin/shairplay&apos;) == &apos;&apos; ]] &amp;&amp;</div><div class="line"> screen -S shairplay -p 0 -X stuff &quot;while true; do /usr/bin/shairplay --apname=Airamaplay --ao_devicename=default; sleep 2s; done</div><div class="line">&quot;</div></pre></td></tr></table></figure></p>
+<p>之后通过<code>CTRL+O</code> 保存更改， <code>CTRL+X</code>退出编辑器。</p>
+<p>之后通过重启树莓派，就直接可以在苹果设备中选择AirPlay服务了。</p>
+<h2 id="消除噪音"><a href="#消除噪音" class="headerlink" title="消除噪音"></a>消除噪音</h2><p>如果音响输出有噪声，可以尝试树莓派Audio的pwm模式。<br>执行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo nano /boot/config.txt</div></pre></td></tr></table></figure></p>
+<p>在最后增加如下配置参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">dtparam=audio=on</div><div class="line">audio_pwm_mode=2</div></pre></td></tr></table></figure></p>
+<p>之后通过<code>CTRL+O</code> 保存更改， <code>CTRL+X</code>退出编辑器。</p>
+<hr>
+<p>感谢以下文章提供的帮助:</p>
+<ul>
+<li><a href="http://shumeipai.nxez.com/2013/09/04/login-rpi-with-vnc.html?variant=zh-cn" target="_blank" rel="external">VNC远程登录树莓派的图形界面</a></li>
+<li><a href="http://bbs.shumeipaiba.com/thread-15-1-1.html" target="_blank" rel="external">树莓派连接无线网设置wifi方法</a></li>
+<li><a href="https://sspai.com/post/39839" target="_blank" rel="external">跟着上手树莓派（三）—— 让你的有线音箱从此无拘无束</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>来都来了，不支持一下吗？</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="haohao WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="haohao Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/树莓派/" rel="tag"># 树莓派</a>
+          
+            <a href="/tags/Airplay/" rel="tag"># Airplay</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/03/从“0”开始搭建个人博客(3)/" rel="next" title="从“0”开始搭建个人博客(3)——个性化博客">
+                <i class="fa fa-chevron-left"></i> 从“0”开始搭建个人博客(3)——个性化博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/07/从“0”开始搭建个人博客(4)/" rel="prev" title="从“0”开始搭建个人博客(4)——补充">
+                从“0”开始搭建个人博客(4)——补充 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTg4MC82NDQ1"></div>
+    
+  </div>
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ots0oqrma.bkt.clouddn.com/17-7-28/33649087.jpg"
+               alt="haohao" />
+          <p class="site-author-name" itemprop="name">haohao</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hhyqhh" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5154729329/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#烧录系统"><span class="nav-number">2.</span> <span class="nav-text">烧录系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#登陆"><span class="nav-number">3.</span> <span class="nav-text">登陆</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH登陆"><span class="nav-number">3.1.</span> <span class="nav-text">SSH登陆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VNC登陆"><span class="nav-number">3.2.</span> <span class="nav-text">VNC登陆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无线链接"><span class="nav-number">3.3.</span> <span class="nav-text">无线链接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更新软件"><span class="nav-number">4.</span> <span class="nav-text">更新软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#更改软件源"><span class="nav-number">4.1.</span> <span class="nav-text">更改软件源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行更新"><span class="nav-number">4.2.</span> <span class="nav-text">执行更新</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Airplay服务"><span class="nav-number">5.</span> <span class="nav-text">安装Airplay服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装依赖环境"><span class="nav-number">5.1.</span> <span class="nav-text">安装依赖环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从GitHub上获取源码"><span class="nav-number">5.2.</span> <span class="nav-text">从GitHub上获取源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译和安装"><span class="nav-number">5.3.</span> <span class="nav-text">编译和安装</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动"><span class="nav-number">6.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#完善"><span class="nav-number">7.</span> <span class="nav-text">完善</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#自启动"><span class="nav-number">7.1.</span> <span class="nav-text">自启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建启动脚本文件"><span class="nav-number">7.1.1.</span> <span class="nav-text">创建启动脚本文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加入执行权限"><span class="nav-number">7.1.2.</span> <span class="nav-text">加入执行权限</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消除噪音"><span class="nav-number">7.2.</span> <span class="nav-text">消除噪音</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haohao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数 <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量 <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

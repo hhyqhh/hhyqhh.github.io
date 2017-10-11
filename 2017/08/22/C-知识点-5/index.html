@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C语言,计算机基础知识," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="记录关于输入输出流和文件类型的相关知识点">
+<meta name="keywords" content="C语言,计算机基础知识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C 知识点(5)">
+<meta property="og:url" content="http://www.hhyqhh.top/2017/08/22/C-知识点-5/index.html">
+<meta property="og:site_name" content="HHYQHH (￣▽￣)／">
+<meta property="og:description" content="记录关于输入输出流和文件类型的相关知识点">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-24T13:22:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C 知识点(5)">
+<meta name="twitter:description" content="记录关于输入输出流和文件类型的相关知识点">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.hhyqhh.top/2017/08/22/C-知识点-5/"/>
+
+
+
+
+
+  <title>C 知识点(5) | HHYQHH (￣▽￣)／</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">HHYQHH (￣▽￣)／</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://www.hhyqhh.top/2017/08/22/C-知识点-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="haohao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://ots0oqrma.bkt.clouddn.com/17-7-28/33649087.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="HHYQHH (￣▽￣)／">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C 知识点(5)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T18:27:20+08:00">
+                2017-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C语言/" itemprop="url" rel="index">
+                    <span itemprop="name">C语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量 <i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>记录关于输入输出流和文件类型的相关知识点<br><a id="more"></a></p>
+<h1 id="文件的类型"><a href="#文件的类型" class="headerlink" title="文件的类型"></a>文件的类型</h1><p>大家都知道计算机的存储，物理上是二进制的，所以文本文件与二进制文件的区别并不是物理上的，而是逻辑上的。这两者只是在编码层次上有差异。简单来说，文本文件是基于字符编码的文件，常见的编码有 ASCII 编码，二进制文件是基于值编码<br>的文件。</p>
+<ul>
+<li>文本文件：<br>以 ASCII 码格式存放，一个字节存放一个字符。 文本文件的每一个字节存放一个 ASCII 码，代表一个字符。这便于对字符的逐个处理，但占用存储空间<br>较多，而且要花费转换时间。</li>
+<li>二进制文件：<br>以值（补码）编码格式存放。二进制文件是把数据以二进制数的格式存放在文件中的，其占用存储空间较少。 数据按其内存中的存储形式原样存放。</li>
+</ul>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>接下来通过一个例子说明两者的区别：<br><code>short int</code> 型的变量在内存中占2个字节（8位）。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">short</span> <span class="keyword">int</span> a = <span class="number">10000</span>;</div></pre></td></tr></table></figure></p>
+<p>数字<code>10000</code>的二进制表示是 ‭<code>0010 0111 0001 0000</code>十六进制表示为<code>0x2710</code>‬。<br>也就是说在计算机内存中变量a的值是以<code>0x2710</code>表示的，也就是之前说的二进制文件。<br>接下来通过输出到文本中，验证之前的表述。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">short</span> a = <span class="number">10000</span>;</div><div class="line">    FILE * fp = fopen(<span class="string">"ascii.txt"</span>,<span class="string">"w"</span>);</div><div class="line">    <span class="built_in">fprintf</span>(fp,<span class="string">"%d"</span>,a);</div><div class="line">    fclose(fp);</div><div class="line"></div><div class="line">    FILE * fp2 = fopen(<span class="string">"bin.txt"</span>,<span class="string">"w"</span>);</div><div class="line">    fwrite(&amp;a,<span class="number">2</span>,<span class="number">1</span>,fp2);</div><div class="line">    fclose(fp2);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>分别以文本和二进制的形式输出到<code>ascii.txt</code>、<code>bin.txt</code>文件中。以十六进制格式查看。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// ascii.txt</div><div class="line">31 30 30 30 30        ;10000</div></pre></td></tr></table></figure></p>
+<p>在文本输出中，分别以ASCII码的形式表示了<code>1 0 0 0 0</code>这5个数字。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// bin.txt</div><div class="line">10 27       ;</div></pre></td></tr></table></figure></p>
+<p>在二进制输出中，把内存中的储存形式直接输出到了txt文件中。</p>
+<hr>
+<h1 id="C语言中文件的输入输出"><a href="#C语言中文件的输入输出" class="headerlink" title="C语言中文件的输入输出"></a>C语言中文件的输入输出</h1><h2 id="用到的函数和结构体"><a href="#用到的函数和结构体" class="headerlink" title="用到的函数和结构体"></a>用到的函数和结构体</h2><h3 id="FILE-结构体"><a href="#FILE-结构体" class="headerlink" title="FILE 结构体"></a>FILE 结构体</h3><p>FILE 结构体是对缓冲区和文件读写状态的记录者，所有对文件的操作，都是通过<br>FILE 结构体完成的。</p>
+<h3 id="fopen-函数"><a href="#fopen-函数" class="headerlink" title="fopen 函数"></a>fopen 函数</h3><p>以 Mode 的方式，打开一个 filename 命名的文件，返回一个指向该文件缓冲的 FILE 结构体指针。</p>
+<h4 id="Mode"><a href="#Mode" class="headerlink" title="Mode"></a>Mode</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">Mode</th>
+<th>处理方式</th>
+<th>当文件不存在</th>
+<th>当文件存在时</th>
+<th>向文件输入</th>
+<th>从文件输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">“r”</td>
+<td>读取</td>
+<td>出错</td>
+<td>打开文件</td>
+<td>不能</td>
+<td>可以</td>
+</tr>
+<tr>
+<td style="text-align:left">“w”</td>
+<td>写入</td>
+<td>建立新文件</td>
+<td>覆盖原有文件</td>
+<td>可以</td>
+<td>不能</td>
+</tr>
+<tr>
+<td style="text-align:left">“a”</td>
+<td>追加</td>
+<td>建立新文件</td>
+<td>追加</td>
+<td>可以</td>
+<td>不能</td>
+</tr>
+<tr>
+<td style="text-align:left">“r+”</td>
+<td>读取\写入</td>
+<td>出错</td>
+<td>打开文件</td>
+<td>可以</td>
+<td>可以</td>
+</tr>
+<tr>
+<td style="text-align:left">“w+”</td>
+<td>写入\读取</td>
+<td>建立新文件</td>
+<td>覆盖原有文件</td>
+<td>可以</td>
+<td>可以</td>
+</tr>
+<tr>
+<td style="text-align:left">“a+”</td>
+<td>读取\追加</td>
+<td>建立新文件</td>
+<td>追加</td>
+<td>可以</td>
+<td>可以</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fclose-函数"><a href="#fclose-函数" class="headerlink" title="fclose 函数"></a>fclose 函数</h3><p>fclose()用来关闭先前 fopen()打开的文件. 此动作会让缓冲区内的数据写入文件中, 并释放系统所提供的文件资源.</p>
+<h2 id="单字符读写"><a href="#单字符读写" class="headerlink" title="单字符读写"></a>单字符读写</h2><h3 id="fputc-函数"><a href="#fputc-函数" class="headerlink" title="fputc 函数"></a>fputc 函数</h3><p>将 ch 字符，写入文件。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    FILE* fp = fopen(<span class="string">"ascii.txt"</span>,<span class="string">"w"</span>);</div><div class="line">    <span class="keyword">if</span>(fp == <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"open error\n"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> ch = <span class="string">'A'</span>;ch&lt;=<span class="string">'Z'</span>;ch++)</div><div class="line">    &#123;</div><div class="line">        fputc(ch,fp);</div><div class="line">    &#125;</div><div class="line">    fclose(fp);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="fgetc-函数"><a href="#fgetc-函数" class="headerlink" title="fgetc 函数"></a>fgetc 函数</h3><p>从文件流中读取一个字符并返回。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    FILE * fp = fopen(<span class="string">"ascii.txt"</span>,<span class="string">"r"</span>);</div><div class="line">    <span class="keyword">if</span>(fp == <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"open error\n"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">char</span> ch;</div><div class="line">    <span class="keyword">while</span>((ch = fgetc(fp))!=EOF)</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%2c"</span>,ch);</div><div class="line">    fclose(fp);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>读取字符，重点是判断。</p>
+<blockquote>
+<p>在C语言中，或更精确地说成C标准函数库中表示文件结束符（end of file）。在while循环中以EOF作为文件结束标志，这种以EOF作为文件结束标志的文件，必须是文本文件。在文本文件中，数据都是以字符的ASCII代码值的形式存放。我们知道，ASCII代码值的范围是0~127，不可能出现-1，因此可以用EOF作为文件结束标志。</p>
+</blockquote>
+<p>feof 这个函数，是去读标志位判断文件是否结束的。即在读到文件结尾的时候 再去读一次，标志位才会置位，此时再来作判断文件处理结束状态，文件到结尾。如果用于打印，则会出现多打一次的的现象。所以普遍这样使用：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    FILE * fp = fopen (<span class="string">"ascii.txt"</span>,<span class="string">"w+"</span>);</div><div class="line">    <span class="keyword">if</span>(fp == <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"open erroe\n"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">char</span> ch = <span class="string">'a'</span>;ch&lt;=<span class="string">'z'</span>;ch++)</div><div class="line">    &#123;</div><div class="line">        fputc(ch,fp);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    rewind(fp);</div><div class="line"></div><div class="line">    <span class="keyword">char</span> ch;</div><div class="line">    <span class="keyword">while</span> ((ch = fgetc(fp))&amp;&amp; !feof(fp)) &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%3c"</span>,ch);</div><div class="line">    &#125;</div><div class="line">    fclose (fp);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>即先读，判断标志位。因为读到末尾也可能会让标志位置位，进而跳出循环。</p>
+<hr>
+<h2 id="文本操作-（一次读一行）"><a href="#文本操作-（一次读一行）" class="headerlink" title="文本操作 （一次读一行）"></a>文本操作 （一次读一行）</h2><h3 id="fputs-函数"><a href="#fputs-函数" class="headerlink" title="fputs 函数"></a>fputs 函数</h3><p>把 str 指向的字符串写入 fp 指向的文件中。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    FILE * fp = fopen (<span class="string">"ascii2.txt"</span>,<span class="string">"w"</span>);</div><div class="line">    <span class="keyword">if</span>(fp == <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"open erroe\n"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="built_in">fputs</span>(<span class="string">"abcdefghijk\n"</span>,fp);</div><div class="line">    <span class="built_in">fputs</span>(<span class="string">"123456789\n"</span>,fp);</div><div class="line">    <span class="keyword">char</span> buf[] = <span class="string">"xyz"</span>;</div><div class="line">    <span class="built_in">fputs</span>(buf,fp);</div><div class="line"></div><div class="line">    fclose(fp);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="fputs-函数-1"><a href="#fputs-函数-1" class="headerlink" title="fputs 函数"></a>fputs 函数</h3><p>从 fp 所指向的文件中，至多读 length-1 个字符，送入字符数组 str 中，如果在读入 length-1 个字符结束前遇\n 或 EOF，读入即结束，字符串读入后在最后加一个‘\0’字符。</p>
+<p>fgets 函数返回有三个条件：</p>
+<ol>
+<li>读 n-1 个字符前遇到\n，读取结束。</li>
+<li>读 n-1 个字符前遇到 EOF，读取结束。</li>
+<li>最多读 n-1 个符，在每读一行后自动追加’\0’。<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    FILE * fp = fopen (<span class="string">"ascii2.txt"</span>,<span class="string">"r"</span>);</div><div class="line">    <span class="keyword">if</span>(fp == <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"open erroe\n"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">char</span> buf[<span class="number">1024</span>];</div><div class="line">    <span class="keyword">while</span> (fgets(buf,<span class="number">1024</span>,fp) != <span class="literal">NULL</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%s"</span>,buf);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    fclose(fp);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h2 id="二进制操作-（一次读写一块字符）"><a href="#二进制操作-（一次读写一块字符）" class="headerlink" title="二进制操作 （一次读写一块字符）"></a>二进制操作 （一次读写一块字符）</h2><h3 id="fwrite-函数"><a href="#fwrite-函数" class="headerlink" title="fwrite 函数"></a>fwrite 函数</h3><p>把 buffer 指向的数据写入 fp 指向的文件中<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    FILE * fpw = fopen (<span class="string">"bin.txt"</span>,<span class="string">"wb"</span>);</div><div class="line">    <span class="keyword">if</span>(fpw == <span class="literal">NULL</span>)</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    <span class="keyword">char</span> * p = <span class="string">"china\nis\ngreat"</span>;</div><div class="line">    fwrite(p,<span class="number">1</span>,<span class="built_in">strlen</span>(p),fpw);</div><div class="line">    fclose(fpw);</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">china</div><div class="line">is</div><div class="line">great</div></pre></td></tr></table></figure></p>
+<p>可以看出，不同于文本写入，二进制写入可吧特殊符号如<code>\n</code>写入。</p>
+<h3 id="fread-函数"><a href="#fread-函数" class="headerlink" title="fread 函数"></a>fread 函数</h3><p>把 fp 指向的文件中的 数据读到 buffer 中<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    FILE * fpr = fopen (<span class="string">"bin.txt"</span>,<span class="string">"rb"</span>);</div><div class="line">    <span class="keyword">if</span>(fpr == <span class="literal">NULL</span>)</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">char</span> buf[<span class="number">1024</span>];</div><div class="line">    <span class="keyword">int</span> n;</div><div class="line">    n = fread(buf,<span class="number">1</span>,<span class="number">1024</span>,fpr);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"n =%d\n"</span>,n);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;n;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%#x\t"</span>,buf[i]);</div><div class="line">    &#125;</div><div class="line">    fclose(fpr);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">0x63	0x68	0x69	0x6e	0x61	0xa	0x69	0x73	0xa	0x67	0x72	0x65	0x61	0x74</div></pre></td></tr></table></figure></p>
+<p>其中文本格式中的回车<code>\n</code>，以<code>0x0a</code>读回。此时的回车符号被当做一个普通的<br>数据。</p>
+<h3 id="fread-fwrite-函数的输入返回参数"><a href="#fread-fwrite-函数的输入返回参数" class="headerlink" title="fread/fwrite 函数的输入返回参数"></a>fread/fwrite 函数的输入返回参数</h3><p>函数声明如下<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fwrite</span> <span class="params">(<span class="keyword">void</span> *buffer , <span class="keyword">int</span> num_bytes , <span class="keyword">int</span> count , FILE *pf)</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">fread</span> <span class="params">(<span class="keyword">void</span> *buffer , <span class="keyword">int</span> num_bytes , <span class="keyword">int</span> count , FILE *pf)</span></span></div></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">buffer</td>
+<td style="text-align:center">指向要输入/输出数据存储区的首地址的指针</td>
+</tr>
+<tr>
+<td style="text-align:center">num_bytes</td>
+<td style="text-align:center">每个要读/写的字段的字节数</td>
+</tr>
+<tr>
+<td style="text-align:center">count</td>
+<td style="text-align:center">要读/写的字段的个数</td>
+</tr>
+<tr>
+<td style="text-align:center">pf</td>
+<td style="text-align:center">要读/写的文件指针</td>
+</tr>
+</tbody>
+</table>
+<p>num_bytes和count两个参数控制的是读写内容的大小。也就是读10个字节的内容，<br><code>num_bytes=2</code>、<code>count=5</code>与<code>num_bytes=5</code>、<code>count=2</code>两组参数的效果在读取内容上是相同的但是考虑到返回参数的含义，我们通常以读写内容的最小单位设定num_bytes的值。应为返回参数有如下定义：成功，返回读/写的字段数；出错或文件结束，返回 0。如果num_bytes的值与实际的读写单位大小不同，会造成返回值无意义或者无法通过返回值判断读写情况。</p>
+<hr>
+<h2 id="文件指针移动函数"><a href="#文件指针移动函数" class="headerlink" title="文件指针移动函数"></a>文件指针移动函数</h2><ul>
+<li>rewind : 将文件指针重新指向一个流的开头。</li>
+<li>ftell : 得到流式文件的当前读写位置,其返回值是当前读写位置偏离文件 头部的字节数。</li>
+<li>fseek : 偏移文件指针。</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>来都来了，不支持一下吗？</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechatpay.jpg" alt="haohao WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/images/alipay.jpg" alt="haohao Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C语言/" rel="tag"># C语言</a>
+          
+            <a href="/tags/计算机基础知识/" rel="tag"># 计算机基础知识</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/22/朱伟《恋练有词》词汇串讲笔记-unit5/" rel="next" title="朱伟《恋练有词》词汇串讲笔记(unit5)">
+                <i class="fa fa-chevron-left"></i> 朱伟《恋练有词》词汇串讲笔记(unit5)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/23/朱伟《恋练有词》词汇串讲笔记-unit6/" rel="prev" title="朱伟《恋练有词》词汇串讲笔记(unit6)">
+                朱伟《恋练有词》词汇串讲笔记(unit6) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTg4MC82NDQ1"></div>
+    
+  </div>
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://ots0oqrma.bkt.clouddn.com/17-7-28/33649087.jpg"
+               alt="haohao" />
+          <p class="site-author-name" itemprop="name">haohao</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">36</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/hhyqhh" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/5154729329/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件的类型"><span class="nav-number">1.</span> <span class="nav-text">文件的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">1.1.</span> <span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C语言中文件的输入输出"><span class="nav-number">2.</span> <span class="nav-text">C语言中文件的输入输出</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用到的函数和结构体"><span class="nav-number">2.1.</span> <span class="nav-text">用到的函数和结构体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FILE-结构体"><span class="nav-number">2.1.1.</span> <span class="nav-text">FILE 结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fopen-函数"><span class="nav-number">2.1.2.</span> <span class="nav-text">fopen 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Mode"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">Mode</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fclose-函数"><span class="nav-number">2.1.3.</span> <span class="nav-text">fclose 函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单字符读写"><span class="nav-number">2.2.</span> <span class="nav-text">单字符读写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fputc-函数"><span class="nav-number">2.2.1.</span> <span class="nav-text">fputc 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fgetc-函数"><span class="nav-number">2.2.2.</span> <span class="nav-text">fgetc 函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本操作-（一次读一行）"><span class="nav-number">2.3.</span> <span class="nav-text">文本操作 （一次读一行）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fputs-函数"><span class="nav-number">2.3.1.</span> <span class="nav-text">fputs 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fputs-函数-1"><span class="nav-number">2.3.2.</span> <span class="nav-text">fputs 函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二进制操作-（一次读写一块字符）"><span class="nav-number">2.4.</span> <span class="nav-text">二进制操作 （一次读写一块字符）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fwrite-函数"><span class="nav-number">2.4.1.</span> <span class="nav-text">fwrite 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fread-函数"><span class="nav-number">2.4.2.</span> <span class="nav-text">fread 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fread-fwrite-函数的输入返回参数"><span class="nav-number">2.4.3.</span> <span class="nav-text">fread/fwrite 函数的输入返回参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件指针移动函数"><span class="nav-number">2.5.</span> <span class="nav-text">文件指针移动函数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">haohao</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      本站访客数 <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      本站总访问量 <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
