@@ -77,7 +77,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python,列表操作," />
+  <meta name="keywords" content="Python,tensorflow,keras," />
 
 
 
@@ -93,18 +93,23 @@
 
 
 
-<meta name="description" content="忙忙碌碌的研究生生活开始了，因为学习需求，学习一下Python。接下来的几天会很快的刷一下语法。这是第一篇。">
-<meta name="keywords" content="Python,列表操作">
+<meta name="description" content="原来在大神的带领下配置过 tensorflow + keras 的环境。重装了电脑。自己又配了一次。这个配置的是GPU版本的tensorflow（运算快）。所以需要安装显卡驱动cuda和运算平台cudaa。之后再python环境下安装tensorflow 和 keras。过程中有不少弯路，所以把步骤记录下来。">
+<meta name="keywords" content="Python,tensorflow,keras">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python 学习(1):基础知识点">
-<meta property="og:url" content="http://www.hhyqhh.top/2017/09/20/Python-学习-1-基础知识点/index.html">
+<meta property="og:title" content="keras配置（WIN10&#x2F;GPU版本）">
+<meta property="og:url" content="http://www.hhyqhh.top/2017/10/12/keras配置/index.html">
 <meta property="og:site_name" content="HHYQHH (￣▽￣)／">
-<meta property="og:description" content="忙忙碌碌的研究生生活开始了，因为学习需求，学习一下Python。接下来的几天会很快的刷一下语法。这是第一篇。">
+<meta property="og:description" content="原来在大神的带领下配置过 tensorflow + keras 的环境。重装了电脑。自己又配了一次。这个配置的是GPU版本的tensorflow（运算快）。所以需要安装显卡驱动cuda和运算平台cudaa。之后再python环境下安装tensorflow 和 keras。过程中有不少弯路，所以把步骤记录下来。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-21T01:08:54.000Z">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-10-12/598730.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-10-12/50637704.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-10-12/44664350.jpg">
+<meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-10-12/7512443.jpg">
+<meta property="og:updated_time" content="2017-10-12T13:56:27.219Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python 学习(1):基础知识点">
-<meta name="twitter:description" content="忙忙碌碌的研究生生活开始了，因为学习需求，学习一下Python。接下来的几天会很快的刷一下语法。这是第一篇。">
+<meta name="twitter:title" content="keras配置（WIN10&#x2F;GPU版本）">
+<meta name="twitter:description" content="原来在大神的带领下配置过 tensorflow + keras 的环境。重装了电脑。自己又配了一次。这个配置的是GPU版本的tensorflow（运算快）。所以需要安装显卡驱动cuda和运算平台cudaa。之后再python环境下安装tensorflow 和 keras。过程中有不少弯路，所以把步骤记录下来。">
+<meta name="twitter:image" content="http://ots0oqrma.bkt.clouddn.com/17-10-12/598730.jpg">
 
 
 
@@ -132,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://www.hhyqhh.top/2017/09/20/Python-学习-1-基础知识点/"/>
+  <link rel="canonical" href="http://www.hhyqhh.top/2017/10/12/keras配置/"/>
 
 
 
 
 
-  <title>Python 学习(1):基础知识点 | HHYQHH (￣▽￣)／</title>
+  <title>keras配置（WIN10/GPU版本） | HHYQHH (￣▽￣)／</title>
   
 
 
@@ -300,7 +305,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://www.hhyqhh.top/2017/09/20/Python-学习-1-基础知识点/">
+    <link itemprop="mainEntityOfPage" href="http://www.hhyqhh.top/2017/10/12/keras配置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="haohao">
@@ -317,7 +322,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Python 学习(1):基础知识点</h1>
+          <h1 class="post-title" itemprop="name headline">keras配置（WIN10/GPU版本）</h1>
         
 
         <div class="post-meta">
@@ -329,8 +334,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-20T20:13:10+08:00">
-                2017-09-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-12T08:36:24+08:00">
+                2017-10-12
               </time>
             
 
@@ -391,61 +396,40 @@
       
 
       
-        <p>忙忙碌碌的研究生生活开始了，因为学习需求，学习一下<em>Python</em>。接下来的几天会很快的刷一下语法。这是第一篇。<br><a id="more"></a></p>
+        <p>原来在大神的带领下配置过 tensorflow + keras 的环境。重装了电脑。自己又配了一次。<br>这个配置的是GPU版本的tensorflow（运算快）。所以需要安装显卡驱动cuda和运算平台cudaa。之后再python环境下安装tensorflow 和 keras。过程中有不少弯路，所以把步骤记录下来。</p>
+<a id="more"></a>
 <hr>
-<h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><blockquote>
-<blockquote>
-<p>列表由一系列按特定顺序排列的元素组成。</p>
-</blockquote>
-</blockquote>
-<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="定义方式："><a href="#定义方式：" class="headerlink" title="定义方式："></a>定义方式：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bicycles = [<span class="string">'trek'</span>, <span class="string">'cannondale'</span>, <span class="string">'redline'</span>, <span class="string">'specialized'</span>]</div></pre></td></tr></table></figure>
-<h3 id="访问方式"><a href="#访问方式" class="headerlink" title="访问方式"></a>访问方式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(bicycles)</div></pre></td></tr></table></figure>
-<h3 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&apos;trek&apos;, &apos;cannondale&apos;, &apos;redline&apos;, &apos;specialized&apos;]</div></pre></td></tr></table></figure>
-<h3 id="访问列表内部元素（下标访问，从零开始）"><a href="#访问列表内部元素（下标访问，从零开始）" class="headerlink" title="访问列表内部元素（下标访问，从零开始）"></a>访问列表内部元素（下标访问，从零开始）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(bicycles[<span class="number">0</span>])</div></pre></td></tr></table></figure>
-<h3 id="支持倒数访问"><a href="#支持倒数访问" class="headerlink" title="支持倒数访问"></a>支持倒数访问</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">print(bicycles[<span class="number">-1</span>]) <span class="comment"># 访问最后一个元素</span></div><div class="line">print(bicycles[<span class="number">-2</span>]) <span class="comment"># 访问倒数第二个元素</span></div></pre></td></tr></table></figure>
-<h3 id="添加元素"><a href="#添加元素" class="headerlink" title="添加元素"></a>添加元素</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bicycles.append(<span class="string">'test'</span>)</div></pre></td></tr></table></figure>
-<h3 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bicycles.insert(<span class="number">0</span>, <span class="string">'test2'</span>) <span class="comment"># ‘0’表示插在列表开头，后面的元素下标依次向后推一个。</span></div></pre></td></tr></table></figure>
-<h3 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">del</span> bicycles[<span class="number">1</span>] <span class="comment"># 删除列表的第二的元素</span></div></pre></td></tr></table></figure>
-<h4 id="pop"><a href="#pop" class="headerlink" title="pop()"></a>pop()</h4><p>方法pop()可删除列表末尾的元素，并让你能够接着使用它。弹出（pop）源自这样的类<br>比：列表就像一个栈，而删除列表末尾的元素相当于弹出栈顶元素。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">testpop = [<span class="string">'aa'</span>,<span class="string">'bb'</span>,<span class="string">'cc'</span>,<span class="string">'dd'</span>]</div><div class="line">print(testpop)</div><div class="line">ret_pop = testpop.pop()</div><div class="line">print(testpop)</div><div class="line">print(ret_pop)</div></pre></td></tr></table></figure></p>
-<p>结果输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[&apos;aa&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;dd&apos;]</div><div class="line">[&apos;aa&apos;, &apos;bb&apos;, &apos;cc&apos;]</div><div class="line">dd</div></pre></td></tr></table></figure></p>
-<h5 id="通过传入索引可以弹出对应的元素"><a href="#通过传入索引可以弹出对应的元素" class="headerlink" title="通过传入索引可以弹出对应的元素"></a>通过传入索引可以弹出对应的元素</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ret_pop = testpop.pop(<span class="number">2</span>)</div><div class="line">print(testpop)</div><div class="line">print(ret_pop)</div></pre></td></tr></table></figure>
-<p>结果输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[&apos;aa&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;dd&apos;]</div><div class="line">[&apos;aa&apos;, &apos;bb&apos;, &apos;dd&apos;]</div><div class="line">cc</div></pre></td></tr></table></figure></p>
-<h5 id="通过内容删除元素"><a href="#通过内容删除元素" class="headerlink" title="通过内容删除元素"></a>通过内容删除元素</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">testpop.remove(<span class="string">'cc'</span>)</div></pre></td></tr></table></figure>
+<h1 id="安装-Anaconda3"><a href="#安装-Anaconda3" class="headerlink" title="安装 Anaconda3"></a>安装 Anaconda3</h1><p>官网直接下载安装。</p>
 <hr>
-<h2 id="组织列表"><a href="#组织列表" class="headerlink" title="组织列表"></a>组织列表</h2><h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">testpop = [<span class="string">'aa'</span>,<span class="string">'dd'</span>,<span class="string">'bb'</span>,<span class="string">'cc'</span>]</div><div class="line">testpop.sort()</div><div class="line">print(testpop)</div></pre></td></tr></table></figure>
-<p>默认回根据ASCII码排序(从小到大)。<code>reverse=True</code>参数可以改变方向。<code>sorted(testpop)</code>会把排序结果返回，并不会改变原来的列表。也可称之为临时排序。</p>
-<h3 id="确定列表长度"><a href="#确定列表长度" class="headerlink" title="确定列表长度"></a>确定列表长度</h3><p>通过<code>len()</code> 函数返回长度<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">testpop = [<span class="string">'aa'</span>,<span class="string">'dd'</span>,<span class="string">'bb'</span>,<span class="string">'cc'</span>]</div><div class="line">print(len(testpop))</div></pre></td></tr></table></figure></p>
+<h1 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h1><p>输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conda create -n tensorflow python=3.5</div></pre></td></tr></table></figure></p>
+<p>激活<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">activate tensorflow</div></pre></td></tr></table></figure></p>
+<p>关闭<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">deactivate tensorflow</div></pre></td></tr></table></figure></p>
 <hr>
-<h2 id="操作列表"><a href="#操作列表" class="headerlink" title="操作列表"></a>操作列表</h2><h3 id="循环遍历"><a href="#循环遍历" class="headerlink" title="循环遍历"></a>循环遍历</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">testpop = [<span class="string">'aa'</span>,<span class="string">'bb'</span>,<span class="string">'cc'</span>,<span class="string">'dd'</span>]</div><div class="line"><span class="keyword">for</span> element <span class="keyword">in</span> testpop:</div><div class="line">    print(element)</div></pre></td></tr></table></figure>
-<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">aa</div><div class="line">bb</div><div class="line">cc</div><div class="line">dd</div></pre></td></tr></table></figure></p>
-<p>通过代码缩进关系表示一个循环包含的内容</p>
+<h1 id="安装Visual-Studio"><a href="#安装Visual-Studio" class="headerlink" title="安装Visual Studio"></a>安装Visual Studio</h1><p>传统安装方法，这里不安装会在安装cuda的时候提示。<br><img src="http://ots0oqrma.bkt.clouddn.com/17-10-12/598730.jpg" alt=""></p>
 <hr>
-<h2 id="数值列表"><a href="#数值列表" class="headerlink" title="数值列表"></a>数值列表</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> value <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">5</span>):</div><div class="line">    print(value)</div></pre></td></tr></table></figure>
-<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td></tr></table></figure></p>
-<p>所以range()，生成的值包含开头不包含结尾。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">numbers = list(range(<span class="number">1</span>,<span class="number">6</span>))</div><div class="line">print(numbers)</div></pre></td></tr></table></figure></p>
-<p>可以创建一个数字列表。<br>另外range()可以传入第三个参数来控制步子长，即数字的间隔<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print(list(range(<span class="number">1</span>,<span class="number">20</span>,<span class="number">3</span>)))</div></pre></td></tr></table></figure></p>
-<p>输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[1, 4, 7, 10, 13, 16, 19]</div></pre></td></tr></table></figure></p>
-<h3 id="统计操作"><a href="#统计操作" class="headerlink" title="统计操作"></a>统计操作</h3><p><code>min()</code>、<code>max()</code>、<code>sum()</code>三个函数可以对数值列表进行取小、取大、求和操作。</p>
-<h3 id="列表解析"><a href="#列表解析" class="headerlink" title="列表解析"></a>列表解析</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">squares = [value**<span class="number">2</span> <span class="keyword">for</span> value <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">11</span>)]</div><div class="line">print(squares)</div></pre></td></tr></table></figure>
-<p>输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]</div></pre></td></tr></table></figure></p>
-<p>要使用这种语法，首先指定一个描述性的列表名，squares；然后，指定一个左方括号，并定义一个表达式，用于生成你要存储到列表中的值。在这个示例中，表达式为value**2，它计算平方值。接下来，编写一个for循环，用于给表达式提供值，再加上右方括号。</p>
+<h1 id="安装GPU驱动"><a href="#安装GPU驱动" class="headerlink" title="安装GPU驱动"></a>安装GPU驱动</h1><h2 id="cuda"><a href="#cuda" class="headerlink" title="cuda"></a>cuda</h2><p>传统安装方式，不赘述<br><img src="http://ots0oqrma.bkt.clouddn.com/17-10-12/50637704.jpg" alt=""></p>
+<h2 id="安装-cudaa"><a href="#安装-cudaa" class="headerlink" title="安装 cudaa"></a>安装 cudaa</h2><p>解压，得到一个<code>cuda</code>文件夹，里面包含三个文件夹<code>bin</code>、<code>include</code>、<code>lib</code>。拷贝到cuda的安装目录下，并且把两个其中的两个路径添加到系统环境变量中。</p>
+<ul>
+<li>cuda安装目录在<code>C:\ProgramData\NVIDIA GPU Computing Toolkit\v8.0</code></li>
+<li>两个需要添加的路径<ul>
+<li><code>C:\ProgramData\NVIDIA GPU Computing Toolkit\v8.0\bin</code></li>
+<li><code>C:\ProgramData\NVIDIA GPU Computing Toolkit\v8.0\lib\x64</code></li>
+</ul>
+</li>
+</ul>
 <hr>
-<h1 id="切片操作"><a href="#切片操作" class="headerlink" title="切片操作"></a>切片操作</h1><h2 id="截取"><a href="#截取" class="headerlink" title="截取"></a>截取</h2><p>切片操作可以简单快速的提取列表中的元素。类似于Matlab中的语法操作。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">test = [<span class="string">'aa'</span>,<span class="string">'bb'</span>,<span class="string">'cc'</span>,<span class="string">'dd'</span>,<span class="string">'ee'</span>]</div><div class="line">print(test[<span class="number">0</span>:<span class="number">3</span>])</div></pre></td></tr></table></figure></p>
-<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&apos;aa&apos;, &apos;bb&apos;, &apos;cc&apos;]</div></pre></td></tr></table></figure></p>
-<p>值得注意的是，类似于range()操作。切片的元素包含开头不包含索引。也就是说[0:3]切出的元素是<code>0,1,2</code>三个元素<br>[a:b]可以省略参数，[:3]省略第一个参数表示从开头截取，[2:]省略第二个元素表示截取到结尾。同事也支持传入<code>负数</code>表示列表从后向前的索引序号。</p>
-<h2 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">test = [<span class="string">'aa'</span>,<span class="string">'bb'</span>,<span class="string">'cc'</span>,<span class="string">'dd'</span>,<span class="string">'ee'</span>]</div><div class="line"><span class="keyword">for</span> element <span class="keyword">in</span> test[<span class="number">1</span>:<span class="number">4</span>]:</div><div class="line">    print(element)</div></pre></td></tr></table></figure>
-<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">bb</div><div class="line">cc</div><div class="line">dd</div></pre></td></tr></table></figure></p>
-<h2 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h2><p>如果直接执行<code>test2 = test</code>这样的语句，两个变量名会指向同一个列表，修改其中的一个列表中的元素会影响另一个列表的元素(其实就是同一个列表)。如下代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">test = [<span class="string">'aa'</span>,<span class="string">'bb'</span>,<span class="string">'cc'</span>,<span class="string">'dd'</span>,<span class="string">'ee'</span>]</div><div class="line">test2 = test</div><div class="line">print(test)</div><div class="line">print(test2)</div><div class="line">test2[<span class="number">0</span>] = <span class="string">'AA'</span></div><div class="line">print(test)</div><div class="line">print(test2)</div></pre></td></tr></table></figure></p>
-<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[&apos;aa&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;dd&apos;, &apos;ee&apos;]</div><div class="line">[&apos;aa&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;dd&apos;, &apos;ee&apos;]</div><div class="line">[&apos;AA&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;dd&apos;, &apos;ee&apos;]</div><div class="line">[&apos;AA&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;dd&apos;, &apos;ee&apos;]</div></pre></td></tr></table></figure></p>
-<p>这样并不是真正意义上的复制<br>复制可以借助切片的方式来操作。并且可以控制复制的范围。同时[:]省略前后=参数表示全部复制。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">test = [<span class="string">'aa'</span>,<span class="string">'bb'</span>,<span class="string">'cc'</span>,<span class="string">'dd'</span>,<span class="string">'ee'</span>]</div><div class="line">test2 = test[:]</div><div class="line">print(test)</div><div class="line">print(test2)</div><div class="line">test2[<span class="number">0</span>] = <span class="string">'AA'</span></div><div class="line">print(test)</div><div class="line">print(test2)</div></pre></td></tr></table></figure>
-<p>输出结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">[&apos;aa&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;dd&apos;, &apos;ee&apos;]</div><div class="line">[&apos;aa&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;dd&apos;, &apos;ee&apos;]</div><div class="line">[&apos;aa&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;dd&apos;, &apos;ee&apos;]</div><div class="line">[&apos;AA&apos;, &apos;bb&apos;, &apos;cc&apos;, &apos;dd&apos;, &apos;ee&apos;]</div></pre></td></tr></table></figure></p>
-<p>可以看到这样的操作后，两个变量名对应着两个列表，修改其中一个不会影响另一个列表的内容。</p>
+<h1 id="安装Tensorflow"><a href="#安装Tensorflow" class="headerlink" title="安装Tensorflow"></a>安装Tensorflow</h1><h2 id="激活python虚拟环境"><a href="#激活python虚拟环境" class="headerlink" title="激活python虚拟环境"></a>激活python虚拟环境</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">activate tensorflow</div></pre></td></tr></table></figure>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>这里安装的是GPU版本。更过细节可以参考<a href="http://www.tensorfly.cn/" target="_blank" rel="external">Tensorflow中文社区</a>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install --ignore-installed --upgrade https://storage.googleapis.com/tensorflow/windows/gpu/tensorflow_gpu-1.2.0-cp35-cp35m-win_amd64.whl</div></pre></td></tr></table></figure></p>
+<h2 id="安装两个依赖包"><a href="#安装两个依赖包" class="headerlink" title="安装两个依赖包"></a>安装两个依赖包</h2><p>两个包分别是<code>numpy</code>、<code>scipy</code>。</p>
+<p>下载网站（<a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/" target="_blank" rel="external">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a> ）。<br><code>cd</code>切换到文件位置，通过<code>pip命令</code>安装。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">numpy-1.13.1+mkl-cp35-cp35m-win_amd64.whl</div><div class="line">pip install scipy‑0.19.1‑cp35‑cp35m‑win_amd64.whl</div></pre></td></tr></table></figure></p>
+<h2 id="安装-kears"><a href="#安装-kears" class="headerlink" title="安装 kears"></a>安装 kears</h2><p>更改软件源以提高下载速度<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install keras -i http://pypi.douban.com/simple --trusted-host pypi.douban.com</div></pre></td></tr></table></figure></p>
+<h2 id="配置-PyCharm"><a href="#配置-PyCharm" class="headerlink" title="配置 PyCharm"></a>配置 PyCharm</h2><p>重要的是在PyCharm新建工程的时候选择虚拟环境。</p>
+<p><img src="http://ots0oqrma.bkt.clouddn.com/17-10-12/44664350.jpg" alt=""></p>
 <hr>
-<h1 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h1><p>列表的元素内容可以随时修改，但是元组的内容无法修改</p>
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">test = (<span class="string">'aa'</span>,<span class="string">'bb'</span>,<span class="string">'cc'</span>,<span class="string">'dd'</span>,<span class="string">'ee'</span>)</div><div class="line">test[<span class="number">0</span>] = <span class="string">'AA'</span>   <span class="comment"># 错误代码 内容无法修改</span></div></pre></td></tr></table></figure>
-<h2 id="遍历-1"><a href="#遍历-1" class="headerlink" title="遍历"></a>遍历</h2><p>方法和列表相同</p>
-<h2 id="修改元素"><a href="#修改元素" class="headerlink" title="修改元素"></a>修改元素</h2><p>元组的内容无法直接修改，但是可以通过重新赋值的方式改变<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">test = (<span class="string">'aa'</span>,<span class="string">'bb'</span>,<span class="string">'cc'</span>,<span class="string">'dd'</span>,<span class="string">'ee'</span>)</div><div class="line">print(test)</div><div class="line">test = (<span class="string">'AA'</span>,<span class="string">'bb'</span>,<span class="string">'cc'</span>,<span class="string">'dd'</span>,<span class="string">'ee'</span>)</div><div class="line">print(test)</div></pre></td></tr></table></figure></p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>复制一个开源的<a href="https://github.com/roatienza/Deep-Learning-Experiments/blob/master/Experiments/Tensorflow/GAN/dcgan_mnist.py" target="_blank" rel="external">Gan网络</a>代码。测试一下GPU的运算效果。</p>
+<p><img src="http://ots0oqrma.bkt.clouddn.com/17-10-12/7512443.jpg" alt=""></p>
+<h2 id="完善bug"><a href="#完善bug" class="headerlink" title="完善bug"></a>完善bug</h2><p>报错提示缺少<code>matplotlib</code>包。在命令行中通过pip安装(要激活虚拟环境)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install matplotlib -i http://pypi.douban.com/simple --trusted-host pypi.douban.com</div></pre></td></tr></table></figure></p>
+<p>之后可以正常运行，证明环境搭建完成！！！</p>
 
       
     </div>
@@ -498,7 +482,9 @@
           
             <a href="/tags/Python/" rel="tag"># Python</a>
           
-            <a href="/tags/列表操作/" rel="tag"># 列表操作</a>
+            <a href="/tags/tensorflow/" rel="tag"># tensorflow</a>
+          
+            <a href="/tags/keras/" rel="tag"># keras</a>
           
         </div>
       
@@ -511,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/27/恋练有词-词汇串讲-笔记/" rel="next" title="朱伟《恋练有词》词汇串讲笔记 (汇总)">
-                <i class="fa fa-chevron-left"></i> 朱伟《恋练有词》词汇串讲笔记 (汇总)
+              <a href="/2017/10/11/电脑崩了/" rel="next" title="电脑崩了">
+                <i class="fa fa-chevron-left"></i> 电脑崩了
               </a>
             
           </div>
@@ -520,10 +506,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/21/Python-学习-2-基础知识点/" rel="prev" title="Python 学习(2):基础知识点">
-                Python 学习(2):基础知识点 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -677,7 +659,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#列表"><span class="nav-number">1.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本操作"><span class="nav-number">1.1.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义方式："><span class="nav-number">1.1.1.</span> <span class="nav-text">定义方式：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问方式"><span class="nav-number">1.1.2.</span> <span class="nav-text">访问方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出结果"><span class="nav-number">1.1.3.</span> <span class="nav-text">输出结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问列表内部元素（下标访问，从零开始）"><span class="nav-number">1.1.4.</span> <span class="nav-text">访问列表内部元素（下标访问，从零开始）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#支持倒数访问"><span class="nav-number">1.1.5.</span> <span class="nav-text">支持倒数访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加元素"><span class="nav-number">1.1.6.</span> <span class="nav-text">添加元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入元素"><span class="nav-number">1.1.7.</span> <span class="nav-text">插入元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除元素"><span class="nav-number">1.1.8.</span> <span class="nav-text">删除元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pop"><span class="nav-number">1.1.8.1.</span> <span class="nav-text">pop()</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#通过传入索引可以弹出对应的元素"><span class="nav-number">1.1.8.1.1.</span> <span class="nav-text">通过传入索引可以弹出对应的元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通过内容删除元素"><span class="nav-number">1.1.8.1.2.</span> <span class="nav-text">通过内容删除元素</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组织列表"><span class="nav-number">1.2.</span> <span class="nav-text">组织列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#排序"><span class="nav-number">1.2.1.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确定列表长度"><span class="nav-number">1.2.2.</span> <span class="nav-text">确定列表长度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作列表"><span class="nav-number">1.3.</span> <span class="nav-text">操作列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#循环遍历"><span class="nav-number">1.3.1.</span> <span class="nav-text">循环遍历</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值列表"><span class="nav-number">1.4.</span> <span class="nav-text">数值列表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建"><span class="nav-number">1.4.1.</span> <span class="nav-text">创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计操作"><span class="nav-number">1.4.2.</span> <span class="nav-text">统计操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表解析"><span class="nav-number">1.4.3.</span> <span class="nav-text">列表解析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#切片操作"><span class="nav-number">2.</span> <span class="nav-text">切片操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#截取"><span class="nav-number">2.1.</span> <span class="nav-text">截取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历"><span class="nav-number">2.2.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制"><span class="nav-number">2.3.</span> <span class="nav-text">复制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#元组"><span class="nav-number">3.</span> <span class="nav-text">元组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">3.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遍历-1"><span class="nav-number">3.2.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改元素"><span class="nav-number">3.3.</span> <span class="nav-text">修改元素</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装-Anaconda3"><span class="nav-number">1.</span> <span class="nav-text">安装 Anaconda3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建虚拟环境"><span class="nav-number">2.</span> <span class="nav-text">创建虚拟环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Visual-Studio"><span class="nav-number">3.</span> <span class="nav-text">安装Visual Studio</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装GPU驱动"><span class="nav-number">4.</span> <span class="nav-text">安装GPU驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cuda"><span class="nav-number">4.1.</span> <span class="nav-text">cuda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-cudaa"><span class="nav-number">4.2.</span> <span class="nav-text">安装 cudaa</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Tensorflow"><span class="nav-number">5.</span> <span class="nav-text">安装Tensorflow</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#激活python虚拟环境"><span class="nav-number">5.1.</span> <span class="nav-text">激活python虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">5.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装两个依赖包"><span class="nav-number">5.3.</span> <span class="nav-text">安装两个依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装-kears"><span class="nav-number">5.4.</span> <span class="nav-text">安装 kears</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-PyCharm"><span class="nav-number">5.5.</span> <span class="nav-text">配置 PyCharm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试"><span class="nav-number">6.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#完善bug"><span class="nav-number">6.1.</span> <span class="nav-text">完善bug</span></a></li></ol></li></ol></div>
             
 
           </div>
