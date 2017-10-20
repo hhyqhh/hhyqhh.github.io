@@ -93,21 +93,21 @@
 
 
 
-<meta name="description" content="基于Logistic回归的思想，利用梯度上升的方法，求取回归系数。并且完成对马生病数据的训练和预测">
+<meta name="description" content="基于Logistic回归的思想，利用梯度上升的方法，求取回归系数。并且完成对马生病数据的训练和预测。">
 <meta name="keywords" content="机器学习,python,Logistic回归">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习算法(4) Logistic回归">
 <meta property="og:url" content="http://www.hhyqhh.top/2017/10/19/机器学习算法-4-Logistic回归/index.html">
 <meta property="og:site_name" content="HHYQHH (￣▽￣)／">
-<meta property="og:description" content="基于Logistic回归的思想，利用梯度上升的方法，求取回归系数。并且完成对马生病数据的训练和预测">
+<meta property="og:description" content="基于Logistic回归的思想，利用梯度上升的方法，求取回归系数。并且完成对马生病数据的训练和预测。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-10-20/75983984.jpg">
 <meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-10-20/77864673.jpg">
 <meta property="og:image" content="http://ots0oqrma.bkt.clouddn.com/17-10-20/10365893.jpg">
-<meta property="og:updated_time" content="2017-10-20T07:21:48.727Z">
+<meta property="og:updated_time" content="2017-10-20T07:25:04.834Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法(4) Logistic回归">
-<meta name="twitter:description" content="基于Logistic回归的思想，利用梯度上升的方法，求取回归系数。并且完成对马生病数据的训练和预测">
+<meta name="twitter:description" content="基于Logistic回归的思想，利用梯度上升的方法，求取回归系数。并且完成对马生病数据的训练和预测。">
 <meta name="twitter:image" content="http://ots0oqrma.bkt.clouddn.com/17-10-20/75983984.jpg">
 
 
@@ -395,8 +395,9 @@
       
 
       
-        <p>基于Logistic回归的思想，利用梯度上升的方法，求取回归系数。并且完成对马生病数据的训练和预测<br><a id="more"></a></p>
+        <p>基于Logistic回归的思想，利用梯度上升的方法，求取回归系数。并且完成对马生病数据的训练和预测。<br><a id="more"></a></p>
 <hr>
+<p>例子来自《Machine Learning in Action》 Peter Harrington</p>
 <h1 id="梯度上升"><a href="#梯度上升" class="headerlink" title="梯度上升"></a>梯度上升</h1><h2 id="加载数据集"><a href="#加载数据集" class="headerlink" title="加载数据集"></a>加载数据集</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">数据集合中有两类共<span class="number">100</span>个数据点</div><div class="line"><span class="string">""" 加载数据集 """</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadDataSet</span><span class="params">()</span>:</span></div><div class="line">    dataMat = []; labelMat = []</div><div class="line">    fr = open(<span class="string">'testSet.txt'</span>)</div><div class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> fr.readlines():</div><div class="line">        lineArr = line.strip().split()</div><div class="line">        dataMat.append([<span class="number">1.0</span>, float(lineArr[<span class="number">0</span>]), float(lineArr[<span class="number">1</span>])])</div><div class="line">        labelMat.append(int(lineArr[<span class="number">2</span>]))</div><div class="line">    <span class="keyword">return</span> dataMat,labelMat</div></pre></td></tr></table></figure>
 <hr>
 <h2 id="sigmoid函数"><a href="#sigmoid函数" class="headerlink" title="sigmoid函数"></a>sigmoid函数</h2><p>利用该函数的函数性质，用于分类<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="string">""" sigmoid函数 """</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(inX)</span>:</span></div><div class="line">    <span class="keyword">return</span> <span class="number">1.0</span>/(<span class="number">1</span>+exp(-inX))</div></pre></td></tr></table></figure></p>
